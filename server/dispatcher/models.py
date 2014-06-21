@@ -10,7 +10,6 @@ class Driver(models.Model):
 
     def to_dict(self):
         return { 'name' : self.name,
-                 'employee_number' : self.employnum,
                  'latitude' : self.lati,
                  'longitude' : self.longi }
 
@@ -33,5 +32,4 @@ class Passenger(models.Model):
                  'num_passengers' : self.num_pass, 
                  'location_pickup' : self.loc_pickup, 
                  'location_dropoff' : self.loc_drop, 
-                 'request_time' : self.req_time, 
-                 'asap_flag' : self.asap_flag }
+                 'request_time' : self.req_time }
