@@ -2,6 +2,7 @@ from dispatcher.models import Driver, Passenger
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.core.serializers.json import DjangoJSONEncoder
+from django.core.exceptions import ObjectDoesNotExist
 import sys, json
 
 # Create your views here.
@@ -12,7 +13,7 @@ def add_driver(request):
         try: 
             driver = Driver.objects.get(employnum=info['employee_number'])
             return HttpResponse(status=400)
-        except Dispatcher.DoesNotExist:
+        except ObjectDoesNotExist:
             driver = Driver( name=info['name'],
                              employnum=info['employee_number'],
                              lati=info['latitude'],
@@ -30,7 +31,7 @@ def remove_driver(request):
             driver = Driver.objects.get(employnum=info['employee_number'])
             driver.delete()
             return HttpResponse(status=200)
-        except Dispatcher.DoesNotExist:
+        except ObjectDoesNotExist:
             return HttpResponse(status=400)
         except KeyError:
             return HttpResponse(status=400)
@@ -42,7 +43,7 @@ def enqueue(request):
         try:
             passenger = Passenger.objects.get(emp_num=info['employee_number'])
             return HttpResponse(status=400)
-        except Dispatcher.DoesNotExist:
+        except ObjectDoesNotExist:
             passenger = Passenger( name=info['name'],
                                    emp_num=info['employee_number'],
                                    num_pass=info['num_passengers'],
@@ -71,7 +72,7 @@ def dequeue(request):
                 return HttpResponse(json.dumps(ret))
             else:
                 return HttpResponse(json.dumps({'response' : 'FAILED'}))
-        except Dispatcher.DoesNotExist:
+        except ObjectDoesNotExist:
             return HttpResponse(status=400)
         except KeyError:
             return HttpResponse(status=400)
@@ -103,7 +104,7 @@ def notif(request):
             passenger = Passenger.objects.get(emp_num=info['employee_number'])
             passenger.delete()
             return HttpResponse(status=200)
-        except Dispatcher.DoesNotExist:
+        except ObjectDoesNotExist:
             return HttpResponse(status=400)
         except KeyError:
             return HttpResponse(status=400)
@@ -118,7 +119,7 @@ def update_gps(request):
             driver.longi = info['latitude']
             driver.save()
             return HttpResponse(status=200)
-        except Dispatcher.DoesNotExist:
+        except ObjectDoesNotExist:
             return HttpResponse(status=400)
         except KeyError:
             return HttpResponse(status=400)
@@ -134,7 +135,7 @@ def fetch_driver(request):
             else:
                 driver = Driver.objects.get(employnum=info['employee_number'])
                 return HttpResponse(driver.to_dict())
-        except Dispatcher.DoesNotExist:
+        except ObjectDoesNotExist:
             return HttpResponse(status=400)
         except KeyError:
             return HttpResponse(status=400)
@@ -149,7 +150,7 @@ def refresh(request):
             for obj in filtered:
                 final.append(obj.to_dict())
             return HttpResponse(json.dumps(final))
-        except Dispatcher.DoesNotExist:
+        except ObjectDoesNotExist:
             return HttpResponse(status=400)
         except KeyError:
             return HttpResponse(status=400)
