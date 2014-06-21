@@ -4,6 +4,7 @@ from django.http import HttpResponse
 from django.core.serializers.json import DjangoJSONEncoder
 from django.core.exceptions import ObjectDoesNotExist
 import sys, json
+from push_notifications.models import GCMDevice
 
 # Create your views here.
 
@@ -82,28 +83,11 @@ def dequeue(request):
 
 def notif(request):
     if request.method == 'POST':
-        # #SERVER = 'gcm.googleapis.com'
-        # #PORT = 5235
-        # USERNAME = "450339303618"
-        # PASSWORD = "AIzaSyAg78AIl6aXP5PFK7mFfJKUEOdN_SBD_30"
-        # #REGISTRATION_ID = "Registration Id of the target device"
-        # client = xmpp.Client('gcm.googleapis.com', debug=['socket'])
-        # client.connect(server=(SERVER,PORT), secure=1, use_srv=False)
-        # auth = client.auth(USERNAME, PASSWORD)
-        # if not auth:
-        #     print 'Authentication failed!'
-        #     sys.exit(1)
-        # def send(json_dict):
-        #     template = ("<message><gcm xmlns='google:mobile:data'>{1}</gcm></message>")
-        #     client.send(xmpp.protocol.Message(
-        #         node=template.format(client.Bind.bound[0], json.dumps(json_dict))))
-        # send({'to': REGISTRATION_ID,
-        #            'message_id': 'reg_id',
-        #            'data': {'message_destination': 'RegId',
-        #                     'message_id': random_id()}})
         try:
             info = json.loads(request.body)
             passenger = Passenger.objects.get(emp_num=info['employee_number'])
+            device = GCMDevice.objects.get(registration_id=info['push_id'])
+            device.send_message({"message": "You're driver will arrive within five minutes."})
             passenger.delete()
             return HttpResponse(status=200)
         except ObjectDoesNotExist:
