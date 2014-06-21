@@ -35,4 +35,4 @@ class Passenger(models.Model):
                  'request_hour' : self.req_hour,
                  'request_min' : self.req_min,
                  'request_AMPM' : self.req_AMPM,
-                 'driver_num' : self.driver_num }
+                 'driver_number' : self.driver_num }

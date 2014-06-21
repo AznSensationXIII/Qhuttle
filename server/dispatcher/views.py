@@ -66,15 +66,22 @@ def dequeue(request):
     if request.method == 'POST':
         try:
             info = json.loads(request.body)
-            passenger = Passenger.objects.get(emp_num=info['employee_number'])
+            passenger = Passenger.objects.get(emp_num=info['passenger_number'])
+            final = {'result' : '', 'data' : {'asap' : [], 'scheduled' : []} }
             if passenger.driver_num == -1:
-                passenger.driver_num = info['driver_num']
+                passenger.driver_num = info['driver_number']
                 passenger.save()
-                ret = passenger.to_dict()
-                ret['response'] = 'SUCCESS'
-                return HttpResponse(json.dumps(ret))
+                final['result'] = 'SUCCESS'
             else:
-                return HttpResponse(json.dumps({'response' : 'FAILED'}))
+                final['result'] = 'FAILED'
+            q = Passenger.objects.all()
+            asaps = q.filter(driver_num=-1,asap_flag=True)
+            for obj in asaps:
+                final['data'].['asap'].append(obj.to_dict())
+            scheds = q.filter(driver_num=-1,asap_flag=False)
+            for obj in scheds:
+                final['data'].['scheduled'].append(obj.to_dict())
+            return HttpResponse(json.dumps(final))
         except ObjectDoesNotExist:
             return HttpResponse(status=400)
         except KeyError:
@@ -119,7 +126,7 @@ def fetch_driver(request):
             if passenger.emp_num == -1:
                 return HttpResponse(status=400)
             else:
-                driver = Driver.objects.get(employnum=info['employee_number'])
+                driver = Driver.objects.get(employnum=passenger.driver_num)
                 return HttpResponse(driver.to_dict())
         except ObjectDoesNotExist:
             return HttpResponse(status=400)
