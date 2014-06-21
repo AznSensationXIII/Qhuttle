@@ -49,7 +49,9 @@ def enqueue(request):
                                    num_pass=info['num_passengers'],
                                    loc_pickup=info['location_pickup'],
                                    loc_drop=info['location_dropoff'],
-                                   req_time=info['request_time'],
+                                   req_hour=info['request_hour'],
+                                   req_min=info['request_minute'], 
+                                   req_AMPM=info['request_AMPM'],
                                    asap_flag=info['asap_flag'],
                                    driver_num=info['driver_number'],
                                    push_id=info['push_id'] )
