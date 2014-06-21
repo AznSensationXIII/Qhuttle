@@ -138,7 +138,7 @@ def refresh(request):
             scheds = info.filter(driver_num=-1,asap_flag=False)
             for obj in scheds:
                 result['scheduled'].append(obj.to_dict())
-            return HttpResponse(json.dumps(final))
+            return HttpResponse(json.dumps(result))
         except ObjectDoesNotExist:
             return HttpResponse(status=400)
         except KeyError:

@@ -32,4 +32,7 @@ class Passenger(models.Model):
                  'num_passengers' : self.num_pass, 
                  'location_pickup' : self.loc_pickup, 
                  'location_dropoff' : self.loc_drop, 
-                 'request_time' : self.req_time }
+                 'request_hour' : self.req_hour,
+                 'request_min' : self.req_min,
+                 'request_AMPM' : self.req_AMPM,
+                 'driver_num' : self.driver_num }
