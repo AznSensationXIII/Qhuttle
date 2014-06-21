@@ -1,3 +1,5 @@
 from django.contrib import admin
+from dispatcher.models import Driver, Passenger
 
-# Register your models here.
+admin.site.register(Driver)
+admin.site.register(Passenger)
