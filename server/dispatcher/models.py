@@ -25,3 +25,13 @@ class Passenger(models.Model):
     driver_num = models.IntegerField(default=-1)
     push_id = models.IntegerField(default=-1)
 
+    def to_dict(self):
+        return { 'name' : self.name,
+                 'employee_number' : self.emp_num, 
+                 'num_passengers' : self.num_pass, 
+                 'location_pickup' : self.loc_pickup, 
+                 'location_dropoff' : self.loc_drop, 
+                 'request_time' : self.req_time, 
+                 'asap_flag' : self.asap_flag, 
+                 'driver_number' : self.driver_num, 
+                 'push_id' : self.push_id }
