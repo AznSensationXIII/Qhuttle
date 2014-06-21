@@ -56,10 +56,17 @@ def dequeue(request):
             passenger = Passenger.objects.get(emp_num=info['employee_number'])
             if passenger.driver_num == -1:
                 passenger.driver_num = info['driver_num']
-
+                ret = passenger.to_dict()
+                ret['response'] = 'SUCCESS'
+                return HttpResponse(json.dumps(ret))
+            else:
+                return HttpResponse(json.dumps({'response' : 'FAILED'}))
         except Dispatcher.DoesNotExist:
             return HttpResponse(status=400)
         except KeyError:
             return HttpResponse(status=400)
 
+def notif(request):
+    if request.method == 'POST':
+        
 
