@@ -3,6 +3,8 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.core.serializers.json import DjangoJSONEncoder
 import json
+from gcm import GCM
+import sys, json, xmpp
 
 # Create your views here.
 
@@ -18,6 +20,7 @@ def add_driver(request):
             return HttpResponse(status=200)
         except KeyError:
             return HttpResponse(status=400)
+    return HttpResponse(status=418)
 
 def remove_driver(request):
     if request.method == "POST":
@@ -30,13 +33,14 @@ def remove_driver(request):
             return HttpResponse(status=400)
         except KeyError:
             return HttpResponse(status=400)
+    return HttpResponse(status=418)
 
 def enqueue(request):
     if request.method == 'POST':
         try:
             info = json.loads(request.body)
             passenger = Passenger( name=info['name'],
-                                   emp_num=info['employee_number']
+                                   emp_num=info['employee_number'],
                                    num_pass=info['num_passengers'],
                                    loc_pickup=info['location_pickup'],
                                    loc_drop=info['location_dropoff'],
@@ -48,6 +52,7 @@ def enqueue(request):
             return HttpResponse(status=200)
         except KeyError:
             return HttpResponse(status=400)
+    return HttpResponse(status=418)
 
 def dequeue(request):
     if request.method == 'POST':
@@ -56,6 +61,7 @@ def dequeue(request):
             passenger = Passenger.objects.get(emp_num=info['employee_number'])
             if passenger.driver_num == -1:
                 passenger.driver_num = info['driver_num']
+                passenger.save()
                 ret = passenger.to_dict()
                 ret['response'] = 'SUCCESS'
                 return HttpResponse(json.dumps(ret))
@@ -65,8 +71,82 @@ def dequeue(request):
             return HttpResponse(status=400)
         except KeyError:
             return HttpResponse(status=400)
+    return HttpResponse(status=418)
 
 def notif(request):
     if request.method == 'POST':
+        # #SERVER = 'gcm.googleapis.com'
+        # #PORT = 5235
+        # USERNAME = "450339303618"
+        # PASSWORD = "AIzaSyAg78AIl6aXP5PFK7mFfJKUEOdN_SBD_30"
+        # #REGISTRATION_ID = "Registration Id of the target device"
+        # client = xmpp.Client('gcm.googleapis.com', debug=['socket'])
+        # client.connect(server=(SERVER,PORT), secure=1, use_srv=False)
+        # auth = client.auth(USERNAME, PASSWORD)
+        # if not auth:
+        #     print 'Authentication failed!'
+        #     sys.exit(1)
+        # def send(json_dict):
+        #     template = ("<message><gcm xmlns='google:mobile:data'>{1}</gcm></message>")
+        #     client.send(xmpp.protocol.Message(
+        #         node=template.format(client.Bind.bound[0], json.dumps(json_dict))))
+        # send({'to': REGISTRATION_ID,
+        #            'message_id': 'reg_id',
+        #            'data': {'message_destination': 'RegId',
+        #                     'message_id': random_id()}})
+        try:
+            info = json.loads(request.body)
+            passenger = Passenger.objects.get(emp_num=info['employee_number'])
+            passenger.delete()
+            return HttpResponse(status=200)
+        except Dispatcher.DoesNotExist:
+            return HttpResponse(status=400)
+        except KeyError:
+            return HttpResponse(status=400)
+    return HttpResponse(status=418)
+
+def update_gps(request):
+    if request.method == 'POST':
+        try:
+            info = json.loads(request.body)
+            driver = Driver.objects.get(employnum=info['employee_number'])
+            driver.lati = info['longitude']
+            driver.longi = info['latitude']
+            driver.save()
+            return HttpResponse(status=200)
+        except Dispatcher.DoesNotExist:
+            return HttpResponse(status=400)
+        except KeyError:
+            return HttpResponse(status=400)
+    return HttpResponse(status=418)
+
+def fetch_driver(request):
+    pass
+
+def refresh(request):
+    if request.method == 'GET':
+        try:
+            final = []
+            info = Passenger.objects.all()
+            filtered = info.filter(driver_num=-1)
+            for obj in filtered:
+                final.append(obj.to_dict())
+            return HttpResponse(json.dumps(final))
+        except Dispatcher.DoesNotExist:
+            return HttpResponse(status=400)
+        except KeyError:
+            return HttpResponse(status=400)
+    return HttpResponse(status=418)
+
+
+
+
+
+
+
+
+
+
+
         
 

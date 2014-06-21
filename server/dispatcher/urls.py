@@ -7,6 +7,6 @@ urlpatterns = patterns('',
     url(r'^enqueue', views.enqueue), 
     url(r'^dequeue', views.dequeue), 
     url(r'^notif', views.notif),
-    url(r'^update', views.update),  
+    url(r'^update', views.update_gps),  
     url(r'^fetch_driver', views.fetch_driver), 
 )
