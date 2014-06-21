@@ -2,16 +2,17 @@ from dispatcher.models import Driver, Passenger
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.core.serializers.json import DjangoJSONEncoder
-import json
-from gcm import GCM
-import sys, json, xmpp
+import sys, json
 
 # Create your views here.
 
 def add_driver(request):
     if request.method == 'POST':
+        info = json.loads(request.body)
         try: 
-            info = json.loads(request.body)
+            driver = Driver.objects.get(employnum=info['employee_number'])
+            return HttpResponse(status=400)
+        except Dispatcher.DoesNotExist:
             driver = Driver( name=info['name'],
                              employnum=info['employee_number'],
                              lati=info['latitude'],
@@ -26,7 +27,7 @@ def remove_driver(request):
     if request.method == "POST":
         try:
             info = json.loads(request.body)
-            driver = Driver.objects.get(e_num=info['employee_number'])
+            driver = Driver.objects.get(employnum=info['employee_number'])
             driver.delete()
             return HttpResponse(status=200)
         except Dispatcher.DoesNotExist:
@@ -37,8 +38,11 @@ def remove_driver(request):
 
 def enqueue(request):
     if request.method == 'POST':
+        info = json.loads(request.body)
         try:
-            info = json.loads(request.body)
+            passenger = Passenger.objects.get(emp_num=info['employee_number'])
+            return HttpResponse(status=400)
+        except Dispatcher.DoesNotExist:
             passenger = Passenger( name=info['name'],
                                    emp_num=info['employee_number'],
                                    num_pass=info['num_passengers'],
@@ -121,7 +125,20 @@ def update_gps(request):
     return HttpResponse(status=418)
 
 def fetch_driver(request):
-    pass
+    if request.method == 'GET':
+        try:
+            info = json.loads(request.body)
+            passenger = Passenger.objects.get(emp_num=info['employee_number'])
+            if passenger.emp_num == -1:
+                return HttpResponse(status=400)
+            else:
+                driver = Driver.objects.get(employnum=info['employee_number'])
+                return HttpResponse(driver.to_dict())
+        except Dispatcher.DoesNotExist:
+            return HttpResponse(status=400)
+        except KeyError:
+            return HttpResponse(status=400)
+    return HttpResponse(status=418)
 
 def refresh(request):
     if request.method == 'GET':

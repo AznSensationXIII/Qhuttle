@@ -32,6 +32,4 @@ class Passenger(models.Model):
                  'location_pickup' : self.loc_pickup, 
                  'location_dropoff' : self.loc_drop, 
                  'request_time' : self.req_time, 
-                 'asap_flag' : self.asap_flag, 
-                 'driver_number' : self.driver_num, 
-                 'push_id' : self.push_id }
+                 'asap_flag' : self.asap_flag }
