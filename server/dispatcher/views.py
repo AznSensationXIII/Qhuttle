@@ -146,27 +146,18 @@ def fetch_driver(request):
 def refresh(request):
     if request.method == 'GET':
         try:
-            final = []
+            result = {'ASAPs' : [], 'Scheduled' : []}
             info = Passenger.objects.all()
-            filtered = info.filter(driver_num=-1)
-            for obj in filtered:
-                final.append(obj.to_dict())
+            asaps = info.filter(driver_num=-1,asap_flag=True)
+            for obj in asaps:
+                result['ASAPS'].append(obj.to_dict())
+            scheds = info.filter(driver_num=-1,asap_flag=False)
+            for obj in scheds:
+                result['Scheduled'].append(obj.to_dict())
             return HttpResponse(json.dumps(final))
         except ObjectDoesNotExist:
             return HttpResponse(status=400)
         except KeyError:
             return HttpResponse(status=400)
     return HttpResponse(status=418)
-
-
-
-
-
-
-
-
-
-
-
-        
 
