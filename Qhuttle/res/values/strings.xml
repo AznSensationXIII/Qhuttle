@@ -4,5 +4,99 @@
     <string name="app_name">Qhuttle</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="buttonSubmit">Submit Request</string>
+    <string name="clientHint">Name</string>
+    <string name="title_login_screen">Login Screen</string>
+    <string name="asap_yes">yes</string>
+    <string name="asap_no">no</string>
+    <string-array name="BuildingList">
+        <item >A</item>
+        <item >AA</item>
+        <item >AE</item>
+        <item >AI</item>
+        <item >AK</item>
+        <item >AO</item>
+        <item >AQ</item>
+        <item >AR</item>
+        <item >AS</item>
+        <item >AT</item>
+        <item >AU</item>
+        <item >AV</item>
+        <item >AW</item>
+        <item >AX</item>
+        <item >AZT</item>
+        <item >BB</item>
+        <item >BC</item>
+        <item >BCT</item>
+        <item >BF</item>
+        <item >BG</item>
+        <item >BL</item>
+        <item >D</item>
+        <item >E</item>
+        <item >F</item>
+        <item >N</item>
+        <item >O</item>
+        <item >P</item>
+        <item >Q</item>
+        <item >QP</item>
+        <item >QRC</item>
+        <item >R</item>
+        <item >S</item>
+        <item >T</item>
+        <item >W</item>
+        <item >WA</item>
+        <item >WB</item>
+        <item >WC</item>
+        <item >WD</item>
+        <item >WE</item>
+        <item >WT</item>
+        <item >WT</item>
+    </string-array>
+    <string-array name="dropoffBuildingList">
+        <item >A</item>
+        <item >AA</item>
+        <item >AE</item>
+        <item >AI</item>
+        <item >AK</item>
+        <item >AO</item>
+        <item >AQ</item>
+        <item >AR</item>
+        <item >AS</item>
+        <item >AT</item>
+        <item >AU</item>
+        <item >AV</item>
+        <item >AW</item>
+        <item >AX</item>
+        <item >AZT</item>
+        <item >BB</item>
+        <item >BC</item>
+        <item >BCT</item>
+        <item >BF</item>
+        <item >BG</item>
+        <item >BL</item>
+        <item >D</item>
+        <item >E</item>
+        <item >F</item>
+        <item >N</item>
+        <item >O</item>
+        <item >P</item>
+        <item >Q</item>
+        <item >QP</item>
+        <item >QRC</item>
+        <item >R</item>
+        <item >S</item>
+        <item >T</item>
+        <item >W</item>
+        <item >WA</item>
+        <item >WB</item>
+        <item >WC</item>
+        <item >WD</item>
+        <item >WE</item>
+        <item >WT</item>
+        <item >WT</item>
+    </string-array>
+    <string name="pickupHint">Pick Up Location</string>
+    <string name="dropoffHint">Drop Off Location</string>
+    
 
 </resources>

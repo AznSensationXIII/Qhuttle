@@ -77,10 +77,10 @@ def dequeue(request):
             q = Passenger.objects.all()
             asaps = q.filter(driver_num=-1,asap_flag=True)
             for obj in asaps:
-                final['data'].['asap'].append(obj.to_dict())
+                final['data']['asap'].append(obj.to_dict())
             scheds = q.filter(driver_num=-1,asap_flag=False)
             for obj in scheds:
-                final['data'].['scheduled'].append(obj.to_dict())
+                final['data']['scheduled'].append(obj.to_dict())
             return HttpResponse(json.dumps(final))
         except ObjectDoesNotExist:
             return HttpResponse(status=400)
@@ -93,7 +93,7 @@ def notif(request):
         try:
             info = json.loads(request.body)
             passenger = Passenger.objects.get(emp_num=info['employee_number'])
-            device = GCMDevice.objects.get(registration_id=info['push_id'])
+            device = GCMDevice.objects.get(registration_id=passenger.push_id)
             device.send_message({"message": "You're driver will arrive within five minutes."})
             passenger.delete()
             return HttpResponse(status=200)

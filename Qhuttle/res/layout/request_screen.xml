@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+ <ScrollView  xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"> 
+
+  <LinearLayout
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content"
+      android:orientation="vertical" >
+      
+       <EditText android:id="@+id/clientName"
+        android:layout_weight="1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/clientHint" />
+       
+       <EditText android:id="@+id/clientNumber"
+        android:layout_weight="1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" />
+    
+      <Spinner
+          android:id="@+id/numPassengers"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content" />
+   		
+   	<RadioGroup
+        android:id="@+id/asapNotice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+ 
+      <RadioButton
+          android:id="@+id/asapYes"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:onClick="onRadioButtonClicked"
+          android:text="@string/asap_yes" />
+
+      <RadioButton
+          android:id="@+id/asapNo"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:onClick="onRadioButtonClicked"
+          android:text="@string/asap_no" />
+       </RadioGroup>
+
+      <TimePicker
+          android:id="@+id/pickupTime"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:hint="@string/pickupHint" />
+
+      <Spinner
+          android:id="@+id/pickupLocation"
+          android:layout_width="fill_parent"
+          android:layout_height="wrap_content"
+          android:hint="@string/dropoffHint" />
+
+      <Spinner
+          android:id="@+id/dropoffLocation"
+          android:layout_width="fill_parent"
+          android:layout_height="wrap_content" />
+
+      <Button
+          android:id="@+id/buttonSubmit"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:onClick="sendMessage"
+          android:text="@string/buttonSubmit" />
+	
+   
+ 
+
+</LinearLayout>  
+ </ScrollView>  
+   
