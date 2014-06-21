@@ -1,0 +1,116 @@
+package com.qualsome.qhuttledriver;
+
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import com.google.gson.Gson;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.ViewGroup;
+import android.widget.ListView;
+
+public class PotentialFragment extends Fragment {
+	
+	private PotentialListData potentialList;
+	private ListView listViewScheduled;
+	private ListView listViewAsap;
+	
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState)
+	{
+		potentialList = new PotentialListData();
+		new Refresh(PotentialFragment.this).execute(0);
+		
+		View view = inflater.inflate(R.layout.fragment_potential,
+				container, false);
+		
+		listViewScheduled = (ListView)view.findViewById(R.id.potential_list_scheduled);
+		listViewScheduled.setAdapter(new PotentialListAdapter(getActivity(),
+			potentialList.asap, false));
+		listViewScheduled.setOnClickListener(new OnClickListener()
+		{
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		
+		listViewAsap = (ListView)view.findViewById(R.id.potential_list_asap);
+		listViewAsap.setAdapter(new PotentialListAdapter(getActivity(),
+			potentialList.asap, true));
+		
+		return view;
+	}
+	
+	public void setPotentialList(PotentialListData list)
+	{
+		potentialList = list;
+	}
+	
+	private static class Refresh extends AsyncTask<Integer, Integer, Integer>
+	{
+		private static final int OK = 0;
+		private static final int UNKNOWN = 1;
+		private static final int NETWORK_ERROR = 2;
+		
+		private Fragment fragment;
+		private PotentialListData list;
+		private volatile boolean running;
+		
+		public Refresh(Fragment frag)
+		{
+			fragment = frag;
+			running = true;
+		}
+		
+		protected void onPreExecute()
+		{
+		}
+		
+		protected void onCancelled()
+		{
+			running = false;
+		}
+		
+		@Override
+		protected Integer doInBackground(Integer... params)
+		{
+			while (running)
+			{
+				try
+				{
+					String str = "http://54.213.39.1:8000/dispatcher/refresh/";
+					URL url = new URL(str);
+					HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+					conn.setRequestMethod("GET");
+					
+					list = new Gson().fromJson(new InputStreamReader
+							(conn.getInputStream()), PotentialListData.class);
+					
+					if (conn.getResponseCode() != 200)
+						return UNKNOWN;
+					return OK;
+				}
+				catch (Exception e)
+				{
+					Log.e("Error", e.toString());
+					return NETWORK_ERROR;
+				}
+			}
+			return NETWORK_ERROR;
+		}
+		
+		protected void onPostExecute(Integer result)
+		{			
+			if (result == OK)
+				((PotentialFragment)fragment).setPotentialList(list);
+		}
+	}
+
+}

@@ -1,0 +1,25 @@
+package com.qualsome.qhuttledriver;
+
+import com.google.gson.annotations.SerializedName;
+
+public class PotentialListData
+{
+	@SerializedName("name")
+	public String name;
+	@SerializedName("employee_number")
+	public int number;
+	@SerializedName("num_passengers")
+	public int passengers;
+	@SerializedName("location_pickup")
+	public String pickup;
+	@SerializedName("location_dropoff")
+	public String dropoff;
+	@SerializedName("request_hour")
+	public int hour;
+	@SerializedName("request_minute")
+	public int minute;
+	@SerializedName("request_ampm")
+	public String ampm;
+	@SerializedName("asap_flag")
+	public boolean asap;
+}

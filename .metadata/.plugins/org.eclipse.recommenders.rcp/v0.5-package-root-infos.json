@@ -1,0 +1,106 @@
+[
+  {
+    "symbolicName": "android-support-v7-appcompat",
+    "version": {
+      "major": -1,
+      "minor": -1,
+      "micro": -1,
+      "qualifier": ""
+    },
+    "jarFileFingerprint": "21297ae2bf22a0ce81c9b59992cf0693eec45d5b",
+    "jarFileModificationDate": "2014-06-20T00:17:54.782-04:00",
+    "location": "C:\\Development\\Qhuttle\\appcompat_v7_2\\libs\\android-support-v7-appcompat.jar",
+    "javaRuntime": false
+  },
+  {
+    "symbolicName": "android-support-v4",
+    "version": {
+      "major": -1,
+      "minor": -1,
+      "micro": -1,
+      "qualifier": ""
+    },
+    "jarFileFingerprint": "ded9acc6a9792b8f1afc470f0c9cd36d178914cd",
+    "jarFileModificationDate": "2014-06-20T00:17:50.285-04:00",
+    "location": "C:\\Development\\Qhuttle\\appcompat_v7_2\\libs\\android-support-v4.jar",
+    "javaRuntime": false
+  },
+  {
+    "symbolicName": "com.google.gson",
+    "version": {
+      "major": 2,
+      "minor": 2,
+      "micro": 3,
+      "qualifier": ""
+    },
+    "jarFileFingerprint": "126d1ea978aa87b87c90f32beac4dc966a318982",
+    "jarFileModificationDate": "2013-10-07T20:54:24-04:00",
+    "location": "C:\\Development\\Qhuttle\\Qhuttle\\libs\\gson-2.2.3.jar",
+    "javaRuntime": false
+  },
+  {
+    "symbolicName": "android-support-v4",
+    "version": {
+      "major": -1,
+      "minor": -1,
+      "micro": -1,
+      "qualifier": ""
+    },
+    "jarFileFingerprint": "ded9acc6a9792b8f1afc470f0c9cd36d178914cd",
+    "jarFileModificationDate": "2014-06-20T00:17:50.285-04:00",
+    "location": "C:\\Development\\Qhuttle\\appcompat_v7\\libs\\android-support-v4.jar",
+    "javaRuntime": false
+  },
+  {
+    "symbolicName": "android-support-v7-appcompat",
+    "version": {
+      "major": -1,
+      "minor": -1,
+      "micro": -1,
+      "qualifier": ""
+    },
+    "jarFileFingerprint": "21297ae2bf22a0ce81c9b59992cf0693eec45d5b",
+    "jarFileModificationDate": "2014-06-20T00:17:54.782-04:00",
+    "location": "C:\\Development\\Qhuttle\\appcompat_v7\\libs\\android-support-v7-appcompat.jar",
+    "javaRuntime": false
+  },
+  {
+    "symbolicName": "appcompat_v7",
+    "version": {
+      "major": -1,
+      "minor": -1,
+      "micro": -1,
+      "qualifier": ""
+    },
+    "jarFileFingerprint": "bd8dcc0bd96237266d0c299d7ea5bb7a06ea8d78",
+    "jarFileModificationDate": "2014-06-20T22:22:59.152-04:00",
+    "location": "C:\\Development\\Qhuttle\\appcompat_v7\\bin\\appcompat_v7.jar",
+    "javaRuntime": false
+  },
+  {
+    "symbolicName": "android",
+    "version": {
+      "major": -1,
+      "minor": -1,
+      "micro": -1,
+      "qualifier": ""
+    },
+    "jarFileFingerprint": "7f972d2aa0fcb741fc84a9a10c98555f6f431a7a",
+    "jarFileModificationDate": "2014-06-20T00:14:42.697-04:00",
+    "location": "C:\\Users\\James\\AppData\\Local\\Android\\android-sdk\\platforms\\android-19\\android.jar",
+    "javaRuntime": false
+  },
+  {
+    "symbolicName": "appcompat_v7_2",
+    "version": {
+      "major": -1,
+      "minor": -1,
+      "micro": -1,
+      "qualifier": ""
+    },
+    "jarFileFingerprint": "75212cfc27d397fdde777059a17cc53df569ec8e",
+    "jarFileModificationDate": "2014-06-20T22:23:06.645-04:00",
+    "location": "C:\\Development\\Qhuttle\\appcompat_v7_2\\bin\\appcompat_v7_2.jar",
+    "javaRuntime": false
+  }
+]
